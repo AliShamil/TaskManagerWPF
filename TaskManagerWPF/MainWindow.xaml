@@ -1,0 +1,137 @@
+﻿<Window x:Class="TaskManagerWPF.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:TaskManagerWPF"
+        mc:Ignorable="d"
+        Title="Insulted Task Manager" Height="450" Width="901">
+    <Grid >
+        <Grid.RowDefinitions>
+            <RowDefinition Height="50"/>
+            <RowDefinition />
+        </Grid.RowDefinitions>
+        <ListView  Grid.Row="1" Foreground="#94929E" Name="ProccesList" ItemsSource="{Binding Processes}" >
+            <ListView.ContextMenu>
+                <ContextMenu>
+                    <MenuItem Header="Add to blacklist" Command="{Binding BlackListCommand}"/>
+                </ContextMenu>
+            </ListView.ContextMenu>
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn Header="Id">
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <TextBlock MinWidth="40" Text="{Binding Id}"/>
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
+                    <GridViewColumn Header="Name">
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <TextBlock Text="{Binding ProcessName}"/>
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
+                  
+                    <GridViewColumn Header="Handle Count">
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <TextBlock Text="{Binding HandleCount}"/>
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
+                    <GridViewColumn Header="Thread Count">
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <TextBlock Text="{Binding Threads.Count}"/>
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
+                    <GridViewColumn Header="Priority">
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <TextBlock Text="{Binding PriorityClass}"/>
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
+                    <GridViewColumn Header="Machine Name">
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <TextBlock Text="{Binding MachineName}"/>
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
+                    <GridViewColumn Header="Start Time">
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <TextBlock Text="{Binding StartTime}"/>
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
+                </GridView>
+            </ListView.View>
+        </ListView>
+
+        <Separator  VerticalAlignment="Bottom"></Separator>
+
+        <Grid >
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+
+
+                <TextBox
+                x:Name="SearchTxt"
+                
+                 
+                materialDesign:HintAssist.Hint="Run Process"
+                VerticalAlignment="Center" 
+                Grid.Row="1"/>
+                <Button Grid.Column="1" HorizontalAlignment="Center" Name="btnSearch" Click="Btn_Search_Click">
+                    <materialDesign:PackIcon
+                Kind="Play"/>
+                </Button>
+        
+
+           
+                <TextBox
+                    Grid.Column="2" 
+                x:Name="txt_BlackList"
+               
+                materialDesign:HintAssist.Hint="Add Process to Blacklist"
+              
+                VerticalAlignment="Center"/>
+            <Button Grid.Column="3"  ToolTip="Add Blacklist" HorizontalAlignment="Center" Name="btnAdd" Click="Btn_Add_Click">
+                    <materialDesign:PackIcon
+                Kind="Add"/>
+                </Button>
+
+            <ComboBox Grid.Column="4"  Name="cb_Priority"  SelectedIndex="0"></ComboBox>
+            <Button Grid.Column="5" ToolTip="Change Priority" HorizontalAlignment="Center" VerticalAlignment="Center" Click="Btn_ChangePriority">
+                <materialDesign:PackIcon
+                Kind="PriorityHigh"/>
+            </Button>
+
+            <Button
+                Grid.Column="6"
+                Name="btnDelete"
+                HorizontalAlignment="Center"
+                Click="Btn_Remove_Click"
+                ToolTip="End Proccess"
+                >
+                <materialDesign:PackIcon
+                Kind="Stop"/>
+            </Button>
+        </Grid>
+
+
+    </Grid>
+</Window>
